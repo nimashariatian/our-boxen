@@ -61,7 +61,19 @@ node default {
   # fail if FDE is not enabled
   if $::root_encrypted == 'no' {
     fail('Please enable full disk encryption and try again')
-  }
+  } 
+  #image magic
+  include imagemagick
+
+  #QT
+  include qt
+   
+  #PhantomJS
+  include phantomjs::1_9_0 
+  phantomjs::global { '1.9.0': }
+
+  #heroku
+  include heroku
 
   # node versions
   nodejs::version { 'v0.6': }
@@ -74,13 +86,18 @@ node default {
   ruby::version { '2.1.0': }
   ruby::version { '2.1.1': }
   ruby::version { '2.1.2': }
+  ruby::version { '2.2.1': }
+  ruby::version { '2.2.2': }
 
   # common, useful packages
   package {
     [
       'ack',
       'findutils',
-      'gnu-tar'
+      'gnu-tar',
+      'bash-completion',
+      'chromedriver',
+      'postgresql'
     ]:
   }
 
