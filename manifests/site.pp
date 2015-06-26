@@ -80,9 +80,6 @@ node default {
   #heroku
   include heroku
 
-  #postgresql 
-  include postgresql
-
   # node versions
   nodejs::version { 'v0.6': }
   nodejs::version { 'v0.8': }
