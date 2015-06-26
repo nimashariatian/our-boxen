@@ -73,8 +73,8 @@ node default {
   include qt
    
   #PhantomJS
-  include phantomjs::1_9_0 
-  phantomjs::global { '1.9.0': }
+  include phantomjs::1_9_8
+  phantomjs::global { '1.9.8': }
 
   #heroku
   include heroku
