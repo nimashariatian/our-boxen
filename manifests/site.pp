@@ -109,7 +109,8 @@ node default {
       'findutils',
       'gnu-tar',
       'bash-completion',
-      'chromedriver'
+      'chromedriver',
+      'postgresql'
     ]:
   }
 
