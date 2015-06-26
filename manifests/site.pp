@@ -11,7 +11,7 @@ Exec {
     "${boxen::config::home}/rbenv/shims",
     "${boxen::config::home}/rbenv/bin",
     "${boxen::config::home}/rbenv/plugins/ruby-build/bin",
-    "${boxen::config::homebrewdir}/bin",
+    "${boxen::config::home}/homebrew/bin",
     '/usr/bin',
     '/bin',
     '/usr/sbin',
@@ -54,14 +54,18 @@ Homebrew::Formula <| |> -> Package <| |>
 node default {
   # core modules, needed for most things
   include dnsmasq
+  include dnsmasq
   include git
   include hub
   include nginx
+  # include bash
+  # include bash::completion
 
   # fail if FDE is not enabled
   if $::root_encrypted == 'no' {
     fail('Please enable full disk encryption and try again')
-  } 
+  }
+
   #image magic
   include imagemagick
 
@@ -74,6 +78,9 @@ node default {
 
   #heroku
   include heroku
+
+  #postgresql 
+  include postgresql
 
   # node versions
   nodejs::version { 'v0.6': }
@@ -89,6 +96,11 @@ node default {
   ruby::version { '2.2.1': }
   ruby::version { '2.2.2': }
 
+  # Set the global default ruby (auto-installs it if it can)
+  class { 'ruby::global':
+    version => '2.2.2'
+  }
+
   # common, useful packages
   package {
     [
@@ -96,8 +108,7 @@ node default {
       'findutils',
       'gnu-tar',
       'bash-completion',
-      'chromedriver',
-      'postgresql'
+      'chromedriver'
     ]:
   }
 
